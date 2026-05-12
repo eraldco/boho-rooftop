@@ -37,7 +37,7 @@ body {
   font-family: 'Josefin Sans', sans-serif;
   overflow-x: hidden;
 }
-img { display:block; width:100%; }
+img { display:block; width:100%; height:100%; object-fit:cover; }
 a { text-decoration:none; }
 
 /* ═══════════════════════════════════════
@@ -61,7 +61,6 @@ nav.solid { background: rgba(10,6,3,.98); }
 }
 .nav-logo span { color: var(--aqua); }
 
-/* desktop links */
 .nav-links {
   display: flex; align-items: center;
   gap: clamp(18px,3vw,38px); list-style: none;
@@ -73,7 +72,6 @@ nav.solid { background: rgba(10,6,3,.98); }
 }
 .nav-links a:hover { opacity:1; color: var(--aqua); }
 
-/* MENU trigger */
 .menu-trigger {
   display: flex; align-items: center; gap: 8px;
   color: var(--sand); font-size: .62rem;
@@ -87,7 +85,6 @@ nav.solid { background: rgba(10,6,3,.98); }
 .menu-trigger.active svg { transform: rotate(180deg); }
 .menu-trigger.active { opacity:1; color: var(--aqua); }
 
-/* hamburger */
 .hamburger {
   display: none; flex-direction: column; gap: 5px;
   background: none; border: none; cursor: pointer; padding: 6px;
@@ -97,7 +94,6 @@ nav.solid { background: rgba(10,6,3,.98); }
   background: var(--sand); transition: all .3s;
 }
 
-/* mobile nav drawer */
 .nav-drawer {
   position: fixed; inset:0; background: rgba(8,5,2,.98);
   display: flex; flex-direction: column;
@@ -114,7 +110,6 @@ nav.solid { background: rgba(10,6,3,.98); }
   color: var(--sand); letter-spacing: .05em;
   transition: color .3s;
   background: none; border: none; cursor: pointer;
-  font-family: 'Cormorant Garamond', serif;
 }
 .nav-drawer a:hover,
 .nav-drawer button.drawer-menu-btn:hover { color: var(--aqua); }
@@ -158,7 +153,6 @@ nav.solid { background: rgba(10,6,3,.98); }
 }
 .menu-close:hover { opacity:1; }
 
-/* category tabs */
 .menu-tabs {
   display: flex; gap: 0;
   overflow-x: auto; scrollbar-width: none;
@@ -183,7 +177,6 @@ nav.solid { background: rgba(10,6,3,.98); }
 }
 .menu-tab:hover { color: var(--sand); }
 
-/* menu panels */
 .menu-body { padding: clamp(28px,5vw,56px) 5vw clamp(40px,8vw,80px); }
 .menu-panel { display: none; }
 .menu-panel.active { display: block; }
@@ -198,7 +191,6 @@ nav.solid { background: rgba(10,6,3,.98); }
 }
 .menu-panel-title em { color: var(--terra); }
 
-/* menu item rows */
 .menu-items { display: flex; flex-direction: column; gap: 0; }
 .menu-item {
   display: flex; justify-content: space-between; align-items: baseline;
@@ -225,7 +217,6 @@ nav.solid { background: rgba(10,6,3,.98); }
   white-space: nowrap; flex-shrink: 0;
 }
 
-/* cocktail cards in menu (grid) */
 .cocktail-menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
@@ -249,14 +240,7 @@ nav.solid { background: rgba(10,6,3,.98); }
 .cocktail-menu-card .item-price {
   font-size: clamp(1rem,1.8vw,1.2rem);
 }
-.card-tag {
-  display: inline-block;
-  font-size: .5rem; letter-spacing: .25em; text-transform: uppercase;
-  color: var(--terra); border: 1px solid rgba(196,112,58,.35);
-  padding: 3px 8px; margin-bottom: 10px;
-}
 
-/* subcategory label */
 .sub-label {
   font-size: .56rem; letter-spacing: .42em; text-transform: uppercase;
   color: var(--aqua); margin: clamp(24px,4vw,36px) 0 clamp(12px,2vw,18px);
@@ -286,7 +270,6 @@ nav.solid { background: rgba(10,6,3,.98); }
 }
 @keyframes twinkle { 0%,100%{opacity:.1} 50%{opacity:.85} }
 
-/* lamps */
 .lamps {
   position:absolute; top:0; left:0; right:0;
   display:flex; justify-content:space-around;
@@ -345,6 +328,7 @@ nav.solid { background: rgba(10,6,3,.98); }
   font-family:'Josefin Sans',sans-serif;
   font-size:.6rem; letter-spacing:.26em; text-transform:uppercase;
   transition:background .3s; display:inline-block;
+  border:none; cursor:pointer;
 }
 .btn-primary:hover { background:var(--burnt); }
 .btn-ghost {
@@ -433,7 +417,7 @@ nav.solid { background: rgba(10,6,3,.98); }
 .stat-label { font-size:.54rem; letter-spacing:.24em; text-transform:uppercase; color:rgba(232,213,176,.4); margin-top:6px; display:block; }
 
 /* ═══════════════════════════════════════
-   COCKTAIL CARDS (front page) — IMAGE PLACEHOLDERS
+   SIGNATURE COCKTAILS
 ═══════════════════════════════════════ */
 #cocktails {
   padding: clamp(56px,12vw,120px) 0;
@@ -443,95 +427,128 @@ nav.solid { background: rgba(10,6,3,.98); }
 
 .cocktail-grid {
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:clamp(8px,1.5vw,14px);
+  grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap:clamp(16px,2.5vw,32px);
   padding:0 5vw;
 }
 
 .cocktail-card {
-  position:relative; border-radius:4px; overflow:hidden;
-  aspect-ratio:3/4;
-  display:flex; flex-direction:column;
+  background: rgba(232,213,176,.03);
+  border: 1px solid rgba(232,213,176,.08);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
 
-/* placeholder "image" zone */
-.card-img {
-  flex:1; position:relative; overflow:hidden;
-  display:flex; align-items:center; justify-content:center;
+.cocktail-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(196,112,58,.4);
+  box-shadow: 0 12px 32px rgba(0,0,0,.4);
 }
 
-/* each card gets a distinct warm gradient */
-.cocktail-card:nth-child(1) .card-img { background:linear-gradient(145deg,#1a0a04,#5a2010 30%,#0d1a18 80%,#0f0a06); }
-.cocktail-card:nth-child(2) .card-img { background:linear-gradient(145deg,#0e1508,#2a4018 40%,#c4703a 90%); }
-.cocktail-card:nth-child(3) .card-img { background:linear-gradient(145deg,#120804,#3a1808 40%,#d4a547 90%); }
-.cocktail-card:nth-child(4) .card-img { background:linear-gradient(145deg,#081008,#1a3010 35%,#5ff0d4 90%); }
-.cocktail-card:nth-child(5) .card-img { background:linear-gradient(145deg,#150a04,#6b3018 40%,#9aab7e 80%); }
-.cocktail-card:nth-child(6) .card-img { background:linear-gradient(145deg,#100804,#2a1008 30%,#b87333 80%,#e8d5b0); }
-
-/* subtle inner glow / atmosphere */
-.card-img::before {
-  content:'';
-  position:absolute; inset:0;
-  background:radial-gradient(ellipse 80% 60% at 50% 70%, rgba(212,165,71,.18) 0%, transparent 70%);
+.card-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: linear-gradient(145deg, #1a0e06, #2a1810);
 }
 
-/* placeholder icon */
-.card-img-icon {
-  position:relative; z-index:1;
-  width:clamp(36px,6vw,56px); aspect-ratio:1;
-  border:1px solid rgba(232,213,176,.2); border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  opacity:.5;
-}
-.card-img-icon svg { width:50%; height:50%; opacity:.7; }
-
-/* upload badge */
-.card-upload-badge {
-  position:absolute; bottom:10px; right:10px; z-index:2;
-  font-size:.46rem; letter-spacing:.2em; text-transform:uppercase;
-  background:rgba(15,10,6,.7); color:rgba(232,213,176,.45);
-  padding:4px 8px; border:1px solid rgba(232,213,176,.12);
-  backdrop-filter:blur(4px);
+.card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
 }
 
-/* info strip below image */
+.cocktail-card:hover .card-img-wrapper img {
+  transform: scale(1.08);
+}
+
+.card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(15,10,6,.85);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(212,165,71,.3);
+  font-size: .52rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 300;
+}
+
 .card-info {
-  background:rgba(15,10,6,.92);
-  padding:clamp(10px,2vw,18px) clamp(10px,2vw,16px);
-  border-top:1px solid rgba(232,213,176,.08);
-}
-.card-name {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(.95rem,2vw,1.5rem); font-weight:300; font-style:italic;
-  color:var(--sand); display:block; margin-bottom:4px;
-}
-.card-desc {
-  font-size:clamp(.48rem,.7vw,.58rem); letter-spacing:.1em;
-  color:rgba(232,213,176,.48); line-height:1.5; display:block; margin-bottom:8px;
-}
-.card-price {
-  font-size:clamp(.78rem,1.3vw,.9rem);
-  color:var(--gold); display:block;
+  padding: clamp(18px,3vw,26px);
 }
 
-/* ingredients animate on hover */
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem,2.5vw,1.8rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--sand);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.card-desc {
+  font-size: clamp(.7rem,1vw,.8rem);
+  letter-spacing: .08em;
+  color: rgba(232,213,176,.5);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
 .card-ingredients {
-  display:flex; flex-wrap:wrap; gap:4px; margin-top:8px;
-  max-height:0; overflow:hidden;
-  transition:max-height .4s ease, opacity .4s ease;
-  opacity:0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(232,213,176,.06);
 }
-.cocktail-card:hover .card-ingredients { max-height:80px; opacity:1; }
-/* on touch — always show */
-.cocktail-card.touch-open .card-ingredients { max-height:80px; opacity:1; }
+
 .ingredient-pill {
-  font-size:.46rem; letter-spacing:.14em; text-transform:uppercase;
-  background:rgba(196,112,58,.15); color:rgba(232,213,176,.6);
-  border:1px solid rgba(196,112,58,.25);
-  padding:3px 7px; border-radius:2px;
-  animation:pillFade .3s ease forwards;
+  font-size: .52rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: rgba(196,112,58,.12);
+  color: rgba(232,213,176,.65);
+  border: 1px solid rgba(196,112,58,.2);
+  padding: 5px 10px;
+  border-radius: 3px;
+  transition: all .3s ease;
 }
-@keyframes pillFade { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+
+.cocktail-card:hover .ingredient-pill {
+  background: rgba(196,112,58,.18);
+  border-color: rgba(196,112,58,.35);
+  color: rgba(232,213,176,.85);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem,2vw,1.4rem);
+  font-weight: 400;
+  color: var(--gold);
+}
+
+.card-intensity {
+  font-size: .5rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(232,213,176,.4);
+}
 
 /* ═══════════════════════════════════════
    GALLERY STRIP
@@ -660,64 +677,52 @@ footer {
 .footer-social a:hover { color:var(--aqua); }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE — MOBILE FIRST
+   RESPONSIVE
 ═══════════════════════════════════════ */
-
-/* hide desktop nav links on mobile */
 @media(max-width:768px) {
   .nav-links { display:none; }
   .hamburger { display:flex; }
 }
 
-/* vibe — stack on mobile */
 @media(max-width:720px) {
   #vibe { grid-template-columns:1fr; }
   .vibe-frame { aspect-ratio:4/3; max-height:300px; }
   .lamps .lamp:nth-child(1),
   .lamps .lamp:nth-child(3) { display:none; }
+  .cocktail-grid { grid-template-columns: 1fr; }
 }
 
-/* cocktails — 2 col on mid, 1 on small */
-@media(max-width:720px) {
-  .cocktail-grid { grid-template-columns:1fr 1fr; padding:0 3vw; }
-}
-@media(max-width:420px) {
-  .cocktail-grid { grid-template-columns:1fr; }
-  .cocktail-card { aspect-ratio:auto; }
-  .card-img { aspect-ratio:16/9; flex:none; }
-  /* always show ingredients on mobile */
-  .card-ingredients { max-height:none; opacity:1; }
+@media(max-width:900px) { 
+  .exp-grid { grid-template-columns:repeat(2,1fr); } 
 }
 
-/* exp — 2 then 1 col */
-@media(max-width:900px) { .exp-grid { grid-template-columns:repeat(2,1fr); } }
-@media(max-width:480px) { .exp-grid { grid-template-columns:1fr; } }
+@media(max-width:480px) { 
+  .exp-grid { grid-template-columns:1fr; } 
+}
 
-/* contact stack */
-@media(max-width:680px) { .contact-grid { grid-template-columns:1fr; } }
+@media(max-width:680px) { 
+  .contact-grid { grid-template-columns:1fr; } 
+}
 
-/* footer */
 @media(max-width:640px) {
   .footer-top { grid-template-columns:1fr 1fr; }
   .footer-top > div:first-child { grid-column:1/-1; }
 }
+
+@media(max-width:540px) {
+  .cocktail-menu-grid { grid-template-columns:1fr; }
+}
+
 @media(max-width:420px) {
   .footer-top { grid-template-columns:1fr; }
   .footer-bottom { flex-direction:column; text-align:center; }
   .footer-social { justify-content:center; }
 }
-
-/* menu tabs scroll on small screens */
-@media(max-width:540px) {
-  .cocktail-menu-grid { grid-template-columns:1fr; }
-}
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════
-     NAV
-══════════════════════════════ -->
+<!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#">BO<span>H</span>O</a>
 
@@ -741,7 +746,7 @@ footer {
   </button>
 </nav>
 
-<!-- mobile drawer -->
+<!-- Mobile drawer -->
 <div class="nav-drawer" id="drawer">
   <button class="drawer-close" id="drawerClose">✕</button>
   <a href="#vibe" class="dl">Our Vibe</a>
@@ -751,9 +756,7 @@ footer {
   <button class="drawer-menu-btn" id="drawerMenuBtn">Menu</button>
 </div>
 
-<!-- ══════════════════════════════
-     MENU OVERLAY
-══════════════════════════════ -->
+<!-- MENU OVERLAY -->
 <div class="menu-overlay" id="menuOverlay">
   <div class="menu-header">
     <span class="menu-logo">BO<span>H</span>O <span style="font-size:.7em;letter-spacing:.2em;color:rgba(232,213,176,.4);font-style:italic">— Menu</span></span>
@@ -901,142 +904,176 @@ footer {
       <h2 class="menu-panel-title"><em>Cocktails</em></h2>
       <div class="cocktail-menu-grid">
         <div class="cocktail-menu-card">
-          <span class="item-name">Amareto Sour</span>
+          <span class="item-name">Amareto Sour</span><br>
+          <span class="item-desc">Amaretto, fresh lemon juice, simple syrup, egg white</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Analkolik</span>
+          <span class="item-name">Analkolik</span><br>
+          <span class="item-desc">Non-alcoholic blend of fresh juices and herbs</span><br>
           <span class="item-price">500 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Aperol Spritz</span>
+          <span class="item-name">Aperol Spritz</span><br>
+          <span class="item-desc">Aperol, prosecco, soda water, orange slice</span><br>
           <span class="item-price">500 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Caipirinha</span>
+          <span class="item-name">Caipirinha</span><br>
+          <span class="item-desc">Cachaça, fresh lime, sugar, muddled</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Caipiroska</span>
+          <span class="item-name">Caipiroska</span><br>
+          <span class="item-desc">Vodka, fresh lime, sugar, muddled</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Campari Spritz</span>
+          <span class="item-name">Campari Spritz</span><br>
+          <span class="item-desc">Campari, prosecco, soda water, orange twist</span><br>
           <span class="item-price">500 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Corona Sunrice</span>
+          <span class="item-name">Corona Sunrice</span><br>
+          <span class="item-desc">Corona beer, tequila, lime, orange juice</span><br>
           <span class="item-price">550 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Cosmopolitan</span>
+          <span class="item-name">Cosmopolitan</span><br>
+          <span class="item-desc">Vodka, triple sec, cranberry juice, fresh lime</span><br>
           <span class="item-price">550 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Daiquiri</span>
+          <span class="item-name">Daiquiri</span><br>
+          <span class="item-desc">White rum, fresh lime juice, simple syrup</span><br>
           <span class="item-price">550 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Expresso Martini</span>
+          <span class="item-name">Expresso Martini</span><br>
+          <span class="item-desc">Vodka, coffee liqueur, fresh espresso, vanilla</span><br>
           <span class="item-price">550 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Gin Fizz</span>
+          <span class="item-name">Gin Fizz</span><br>
+          <span class="item-desc">Gin, lemon juice, sugar, soda water, egg white</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Hugo Spritz</span>
+          <span class="item-name">Hugo Spritz</span><br>
+          <span class="item-desc">Elderflower syrup, prosecco, mint, lime, soda</span><br>
           <span class="item-price">500 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Long Island</span>
+          <span class="item-name">Long Island</span><br>
+          <span class="item-desc">Vodka, rum, gin, tequila, triple sec, cola, lemon</span><br>
           <span class="item-price">750 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Mai Tai</span>
+          <span class="item-name">Mai Tai</span><br>
+          <span class="item-desc">White & dark rum, orgeat, orange curaçao, lime</span><br>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Margarita Spiced</span>
+          <span class="item-name">Margarita Spiced</span><br>
+          <span class="item-desc">Tequila, triple sec, lime, chili salt rim</span><br>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Mojito</span>
+          <span class="item-name">Mojito</span><br>
+          <span class="item-desc">White rum, fresh mint, lime, sugar, soda water</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Moscow Mule</span>
+          <span class="item-name">Moscow Mule</span><br>
+          <span class="item-desc">Vodka, ginger beer, fresh lime, mint</span><br>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Negroni</span>
+          <span class="item-name">Negroni</span><br>
+          <span class="item-desc">Gin, Campari, sweet vermouth, orange peel</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Old Fashioned</span>
+          <span class="item-name">Old Fashioned</span><br>
+          <span class="item-desc">Bourbon, sugar, Angostura bitters, orange twist</span><br>
           <span class="item-price">700 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Paloma</span>
+          <span class="item-name">Paloma</span><br>
+          <span class="item-desc">Tequila, grapefruit soda, lime, salt rim</span><br>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Pina Colada</span>
+          <span class="item-name">Pina Colada</span><br>
+          <span class="item-desc">White rum, coconut cream, pineapple juice</span><br>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Pornostar Martini</span>
+          <span class="item-name">Pornostar Martini</span><br>
+          <span class="item-desc">Vodka, passion fruit liqueur, vanilla, prosecco shot</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Sex On The Beach</span>
+          <span class="item-name">Sex On The Beach</span><br>
+          <span class="item-desc">Vodka, peach schnapps, cranberry, orange juice</span><br>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Tequila Sunrice</span>
+          <span class="item-name">Tequila Sunrice</span><br>
+          <span class="item-desc">Tequila, orange juice, grenadine</span><br>
           <span class="item-price">500 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Vodka Sour</span>
+          <span class="item-name">Vodka Sour</span><br>
+          <span class="item-desc">Vodka, lemon juice, simple syrup, egg white</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Wiskey Sour</span>
+          <span class="item-name">Wiskey Sour</span><br>
+          <span class="item-desc">Whiskey, lemon juice, simple syrup, egg white, cherry</span><br>
           <span class="item-price">600 L</span>
         </div>
       </div>
       <span class="sub-label" style="display:block;margin-top:32px;">Long Drinks</span>
       <div class="cocktail-menu-grid" style="margin-top:16px;">
         <div class="cocktail-menu-card">
-          <span class="item-name">Cuba Libre</span>
+          <span class="item-name">Cuba Libre</span><br>
+          <span class="item-desc">White rum, cola, fresh lime</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Gin Tonic</span>
+          <span class="item-name">Gin Tonic</span><br>
+          <span class="item-desc">Gin, premium tonic water, lime, botanicals</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Jager Bomb</span>
+          <span class="item-name">Jager Bomb</span><br>
+          <span class="item-desc">Jägermeister shot dropped in Red Bull</span><br>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Jager Redbull</span>
+          <span class="item-name">Jager Redbull</span><br>
+          <span class="item-desc">Jägermeister mixed with Red Bull</span><br>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Rum Pineapple</span>
+          <span class="item-name">Rum Pineapple</span><br>
+          <span class="item-desc">White rum, fresh pineapple juice</span><br>
           <span class="item-price">500 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Vodka Portokall</span>
+          <span class="item-name">Vodka Portokall</span><br>
+          <span class="item-desc">Vodka, fresh orange juice</span><br>
           <span class="item-price">450 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Vodka Redbull</span>
+          <span class="item-name">Vodka Redbull</span><br>
+          <span class="item-desc">Vodka mixed with Red Bull energy drink</span><br>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
-          <span class="item-name">Whiskey Ginger</span>
+          <span class="item-name">Whiskey Ginger</span><br>
+          <span class="item-desc">Whiskey, ginger ale, lime</span><br>
           <span class="item-price">600 L</span>
         </div>
       </div>
@@ -1049,42 +1086,52 @@ footer {
       <div class="cocktail-menu-grid">
         <div class="cocktail-menu-card">
           <span class="item-name">Astral Noir</span>
+          <span class="item-desc">Activated charcoal vodka, elderflower, blackberry, star anise</span>
           <span class="item-price">800 L</span>
         </div>
         <div class="cocktail-menu-card">
           <span class="item-name">Aura Split</span>
+          <span class="item-desc">Butterfly pea gin, champagne, lemon, color-changing magic</span>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
           <span class="item-name">Bartender Coctail</span>
+          <span class="item-desc">Surprise creation by our mixologist — ingredients vary daily</span>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
           <span class="item-name">Boho Coctail</span>
+          <span class="item-desc">House signature blend, exotic spices, fresh botanicals</span>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
           <span class="item-name">Elix Coctail</span>
+          <span class="item-desc">Herbal elixir with premium spirits and secret ingredients</span>
           <span class="item-price">650 L</span>
         </div>
         <div class="cocktail-menu-card">
           <span class="item-name">Imperial Mist</span>
+          <span class="item-desc">Smoky mezcal, yuzu, honey mist, rosemary infusion</span>
           <span class="item-price">700 L</span>
         </div>
         <div class="cocktail-menu-card">
           <span class="item-name">Margarita Calabrese</span>
+          <span class="item-desc">Tequila, Calabrian chili, lime, agave, spicy salt rim</span>
           <span class="item-price">600 L</span>
         </div>
         <div class="cocktail-menu-card">
           <span class="item-name">Ramav</span>
+          <span class="item-desc">Tropical rum blend, passion fruit, guava, coconut foam</span>
           <span class="item-price">700 L</span>
         </div>
         <div class="cocktail-menu-card">
           <span class="item-name">Shots</span>
+          <span class="item-desc">Ask your bartender for today's special shot selection</span>
           <span class="item-price">300 L</span>
         </div>
         <div class="cocktail-menu-card">
           <span class="item-name">Vanta Coctail</span>
+          <span class="item-desc">Dark rum, blackcurrant, activated charcoal, vanilla essence</span>
           <span class="item-price">700 L</span>
         </div>
       </div>
@@ -1375,11 +1422,10 @@ footer {
       </div>
     </div>
  
-  </div><!-- /menu-body -->
-</div><!-- /menu-overlay -->
-<!-- ══════════════════════════════
-     HERO
-══════════════════════════════ -->
+  </div>
+</div>
+
+<!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="stars" id="stars"></div>
@@ -1452,7 +1498,7 @@ footer {
     <h1 class="hero-title">BOHO<em>Rooftop</em></h1>
     <span class="hero-sub">Sky-high spirits · Bohemian souls · Endless sunsets</span>
     <div class="hero-btns">
-      <button onclick="openMenu()" class="btn-primary" style="border:none;cursor:pointer;">Explore the Menu</button>
+      <button onclick="openMenu()" class="btn-primary">Explore the Menu</button>
       <a href="#contact" class="btn-ghost">Find Us</a>
     </div>
   </div>
@@ -1470,14 +1516,14 @@ footer {
     <span>Rooftop Vibes</span><span class="dot">✦</span>
     <span>Bohemian Spirit</span><span class="dot">✦</span>
     <span>Golden Hour</span><span class="dot">✦</span>
-    <span>Sky-High Tirana</span><span class="dot">✦</span>
+    <span>Sky-High Fier</span><span class="dot">✦</span>
     <span>Exotic Flavors</span><span class="dot">✦</span>
     <span>Summer Nights</span><span class="dot">✦</span>
     <span>Craft Cocktails</span><span class="dot">✦</span>
     <span>Rooftop Vibes</span><span class="dot">✦</span>
     <span>Bohemian Spirit</span><span class="dot">✦</span>
     <span>Golden Hour</span><span class="dot">✦</span>
-    <span>Sky-High Tirana</span><span class="dot">✦</span>
+    <span>Sky-High Fier</span><span class="dot">✦</span>
     <span>Exotic Flavors</span><span class="dot">✦</span>
     <span>Summer Nights</span><span class="dot">✦</span>
   </div>
@@ -1504,7 +1550,7 @@ footer {
   <div class="vibe-text reveal">
     <span class="section-label">Our Vibe</span>
     <h2 class="section-title">Where the sky<em>meets your soul</em></h2>
-    <p>Perched above Tirana, BOHO is more than a bar — it's a state of mind. Rattan, raw wood, and warm candlelight create an atmosphere as free as the open sky above you.</p>
+    <p>Perched above Fier, BOHO is more than a bar — it's a state of mind. Rattan, raw wood, and warm candlelight create an atmosphere as free as the open sky above you.</p>
     <p>Every detail is curated with intention: handwoven pendants casting amber glows, cocktails that taste like sunsets feel. Come as you are. Leave wishing you could stay forever.</p>
     <div class="vibe-stats">
       <div><span class="stat-num">48+</span><span class="stat-label">Cocktails</span></div>
@@ -1514,7 +1560,7 @@ footer {
   </div>
 </section>
 
-<!-- COCKTAILS — front page cards -->
+<!-- SIGNATURE COCKTAILS -->
 <section id="cocktails">
   <div class="cocktails-hdr reveal">
     <span class="section-label">Signature Pours</span>
@@ -1523,123 +1569,135 @@ footer {
 
   <div class="cocktail-grid">
 
+    
     <div class="cocktail-card reveal">
-      <div class="card-img">
-        <div class="card-img-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 3l18 18M3 21V3"/></svg>
-        </div>
-        <span class="card-upload-badge">Image coming soon</span>
+      <div class="card-img-wrapper">
+        <img src="" alt="Astral Noir">
+        <span class="card-badge">Classic</span>
       </div>
       <div class="card-info">
-        <span class="card-name">Astral Noir</span>
-        <span class="card-price">800 L</span>
+        <h3 class="card-name">Astral Noir</h3>
         <div class="card-ingredients">
-          <span class="ingredient-pill">Blue Curaçao</span>
-          <span class="ingredient-pill">Coconut Rum</span>
-          <span class="ingredient-pill">Fresh Lime</span>
-          <span class="ingredient-pill">Sea Salt Foam</span>
+          <span class="ingredient-pill">White Rum</span>
+          <span class="ingredient-pill">Fresh Mint</span>
+          <span class="ingredient-pill">Lime Juice</span>
+          <span class="ingredient-pill">Sugar</span>
+          <span class="ingredient-pill">Soda Water</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">800 L</span>
+          <span class="card-intensity">● ● ○ Light</span>
         </div>
       </div>
     </div>
 
+    
     <div class="cocktail-card reveal">
-      <div class="card-img">
-        <div class="card-img-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 3l18 18M3 21V3"/></svg>
-        </div>
-        <span class="card-upload-badge">Image coming soon</span>
+      <div class="card-img-wrapper">
+        <img src="" alt="Aura Split" >
+        <span class="card-badge">Bitter & Bold</span>
       </div>
       <div class="card-info">
-        <span class="card-name">Aura Split</span>
-        <span class="card-price">600 L</span>
-        <div class="card-ingredients">
-          <span class="ingredient-pill">Mezcal</span>
-          <span class="ingredient-pill">Honey</span>
-          <span class="ingredient-pill">Ginger</span>
-          <span class="ingredient-pill">Smoked Paprika</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="cocktail-card reveal">
-      <div class="card-img">
-        <div class="card-img-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 3l18 18M3 21V3"/></svg>
-        </div>
-        <span class="card-upload-badge">Image coming soon</span>
-      </div>
-      <div class="card-info">
-        <span class="card-name">Boho Cocktail</span>
-        <span class="card-price">650 L</span>
+        <h3 class="card-name">Aura Split</h3>
         <div class="card-ingredients">
           <span class="ingredient-pill">Gin</span>
-          <span class="ingredient-pill">Elderflower</span>
-          <span class="ingredient-pill">Cucumber</span>
-          <span class="ingredient-pill">Basil</span>
+          <span class="ingredient-pill">Campari</span>
+          <span class="ingredient-pill">Sweet Vermouth</span>
+          <span class="ingredient-pill">Orange Peel</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">600 L</span>
+          <span class="card-intensity">● ● ● Strong</span>
         </div>
       </div>
     </div>
 
+  
     <div class="cocktail-card reveal">
-      <div class="card-img">
-        <div class="card-img-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 3l18 18M3 21V3"/></svg>
-        </div>
-        <span class="card-upload-badge">Image coming soon</span>
+      <div class="card-img-wrapper">
+        <img src="" alt="Boho Cocktail">
+        <span class="card-badge">Energy Boost</span>
       </div>
       <div class="card-info">
-        <span class="card-name">Elix Cocktail</span>
-        <span class="card-price">650 L</span>
+        <h3 class="card-name">Boho Cocktail</h3>
         <div class="card-ingredients">
-          <span class="ingredient-pill">Dark Rum</span>
-          <span class="ingredient-pill">Passion Fruit</span>
-          <span class="ingredient-pill">Chilli</span>
-          <span class="ingredient-pill">Mango</span>
+          <span class="ingredient-pill">Vodka</span>
+          <span class="ingredient-pill">Espresso</span>
+          <span class="ingredient-pill">Kahlúa</span>
+          <span class="ingredient-pill">Vanilla Syrup</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">650 L</span>
+          <span class="card-intensity">● ● ○ Medium</span>
         </div>
       </div>
     </div>
 
+    
     <div class="cocktail-card reveal">
-      <div class="card-img">
-        <div class="card-img-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 3l18 18M3 21V3"/></svg>
-        </div>
-        <span class="card-upload-badge">Image coming soon</span>
+      <div class="card-img-wrapper">
+        <img src="" alt="Elix Cocktail" >
+        <span class="card-badge">Timeless</span>
       </div>
       <div class="card-info">
-        <span class="card-name">Imperial Mist</span>
-        <span class="card-price">700 L</span>
+        <h3 class="card-name">Elix Cocktail</h3>
         <div class="card-ingredients">
           <span class="ingredient-pill">Bourbon</span>
-          <span class="ingredient-pill">Smoked Caramel</span>
-          <span class="ingredient-pill">Orange Bitters</span>
-          <span class="ingredient-pill">Rosemary</span>
+          <span class="ingredient-pill">Sugar Cube</span>
+          <span class="ingredient-pill">Angostura Bitters</span>
+          <span class="ingredient-pill">Orange Twist</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">650 L</span>
+          <span class="card-intensity">● ● ● Strong</span>
         </div>
       </div>
     </div>
 
+    
     <div class="cocktail-card reveal">
-      <div class="card-img">
-        <div class="card-img-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 3l18 18M3 21V3"/></svg>
-        </div>
-        <span class="card-upload-badge">Image coming soon</span>
+      <div class="card-img-wrapper">
+        <img src="" alt="Imperial Mist">
+        <span class="card-badge">Sunset Sip</span>
       </div>
       <div class="card-info">
-        <span class="card-name">Rama V</span>
-        <span class="card-price">700 L</span>
+        <h3 class="card-name">Imperial Mist</h3>
         <div class="card-ingredients">
-          <span class="ingredient-pill">Tequila</span>
-          <span class="ingredient-pill">Hibiscus</span>
-          <span class="ingredient-pill">Aloe Vera</span>
-          <span class="ingredient-pill">Edible Petals</span>
+          <span class="ingredient-pill">Aperol</span>
+          <span class="ingredient-pill">Prosecco</span>
+          <span class="ingredient-pill">Soda Water</span>
+          <span class="ingredient-pill">Orange Slice</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">700 L</span>
+          <span class="card-intensity">● ○ ○ Light</span>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="cocktail-card reveal">
+      <div class="card-img-wrapper">
+        <img src="" alt="Rama V" >
+        <span class="card-badge">Tropical</span>
+      </div>
+      <div class="card-info">
+        <h3 class="card-name">Rama V</h3>
+        <div class="card-ingredients">
+          <span class="ingredient-pill">Gin</span>
+          <span class="ingredient-pill">Cucumber</span>
+          <span class="ingredient-pill">Elderflower/span>
+          <span class="ingredient-pill">Fresh Lime</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-price">700 L</span>
+          <span class="card-intensity">● ● ○ Medium</span>
         </div>
       </div>
     </div>
 
   </div>
 </section>
-
 <!-- GALLERY -->
 <section id="gallery">
   <div class="gallery-hdr reveal">
@@ -1647,22 +1705,71 @@ footer {
     <h2 class="section-title">Live the <em>BOHO</em> moment</h2>
   </div>
   <div class="g-track">
-    <div class="g-item"><div class="g-inner gi1"></div><div class="g-overlay"><span class="g-cap">Rattan & Candlelight</span></div></div>
-    <div class="g-item"><div class="g-inner gi2"></div><div class="g-overlay"><span class="g-cap">Signature Cocktails</span></div></div>
-    <div class="g-item"><div class="g-inner gi3"></div><div class="g-overlay"><span class="g-cap">Golden Hour</span></div></div>
-    <div class="g-item"><div class="g-inner gi4"></div><div class="g-overlay"><span class="g-cap">The Garden Bar</span></div></div>
-    <div class="g-item"><div class="g-inner gi5"></div><div class="g-overlay"><span class="g-cap">Boho Nights</span></div></div>
-    <div class="g-item"><div class="g-inner gi6"></div><div class="g-overlay"><span class="g-cap">Sky Views</span></div></div>
-    <div class="g-item"><div class="g-inner gi7"></div><div class="g-overlay"><span class="g-cap">Craft & Soul</span></div></div>
-    <div class="g-item"><div class="g-inner gi8"></div><div class="g-overlay"><span class="g-cap">Patio Dreams</span></div></div>
-    <div class="g-item"><div class="g-inner gi1"></div><div class="g-overlay"><span class="g-cap">Rattan & Candlelight</span></div></div>
-    <div class="g-item"><div class="g-inner gi2"></div><div class="g-overlay"><span class="g-cap">Signature Cocktails</span></div></div>
-    <div class="g-item"><div class="g-inner gi3"></div><div class="g-overlay"><span class="g-cap">Golden Hour</span></div></div>
-    <div class="g-item"><div class="g-inner gi4"></div><div class="g-overlay"><span class="g-cap">The Garden Bar</span></div></div>
-    <div class="g-item"><div class="g-inner gi5"></div><div class="g-overlay"><span class="g-cap">Boho Nights</span></div></div>
-    <div class="g-item"><div class="g-inner gi6"></div><div class="g-overlay"><span class="g-cap">Sky Views</span></div></div>
-    <div class="g-item"><div class="g-inner gi7"></div><div class="g-overlay"><span class="g-cap">Craft & Soul</span></div></div>
-    <div class="g-item"><div class="g-inner gi8"></div><div class="g-overlay"><span class="g-cap">Patio Dreams</span></div></div>
+    <div class="g-item">
+      <img src="path/to/image1.jpg" alt="Rattan & Candlelight" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Rattan & Candlelight</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image2.jpg" alt="Signature Cocktails" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Signature Cocktails</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image3.jpg" alt="Golden Hour" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Golden Hour</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image4.jpg" alt="The Garden Bar" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">The Garden Bar</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image5.jpg" alt="Boho Nights" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Boho Nights</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image6.jpg" alt="Sky Views" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Sky Views</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image7.jpg" alt="Craft & Soul" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Craft & Soul</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image8.jpg" alt="Patio Dreams" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Patio Dreams</span></div>
+    </div>
+    <!-- Duplicate for infinite scroll effect -->
+    <div class="g-item">
+      <img src="path/to/image1.jpg" alt="Rattan & Candlelight" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Rattan & Candlelight</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image2.jpg" alt="Signature Cocktails" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Signature Cocktails</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image3.jpg" alt="Golden Hour" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Golden Hour</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image4.jpg" alt="The Garden Bar" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">The Garden Bar</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image5.jpg" alt="Boho Nights" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Boho Nights</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image6.jpg" alt="Sky Views" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Sky Views</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image7.jpg" alt="Craft & Soul" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Craft & Soul</span></div>
+    </div>
+    <div class="g-item">
+      <img src="path/to/image8.jpg" alt="Patio Dreams" class="g-inner">
+      <div class="g-overlay"><span class="g-cap">Patio Dreams</span></div>
+    </div>
   </div>
 </section>
 
@@ -1708,16 +1815,17 @@ footer {
         <div>
           <span class="info-label">Hours</span>
           <div class="hours-list">
-            <div class="hours-row"><span class="hours-day">Mon – Thu</span><span class="hours-time">17:00 – 12:00</span></div>
+            <div class="hours-row"><span class="hours-day">Mon – Thu</span><span class="hours-time">17:00 – 01:00</span></div>
             <div class="hours-row"><span class="hours-day">Friday</span><span class="hours-time">18:00 – 02:00</span></div>
-            <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">19:00 – 02:00</span></div>
-            <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">18:00 – 01:00</span></div>
+            <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">19:00 – 03:00</span></div>
+            <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">18:00 – 00:00</span></div>
           </div>
         </div>
         <div>
           <span class="info-label">Contact</span>
           <span class="info-val">
-            <a href="tel:+355000000">+355 68 22 47 554</a><br>
+            <a href="tel:+355000000">+355 68 224 7554</a><br>
+            
           </span>
         </div>
         <div class="social-strip">
@@ -1758,6 +1866,7 @@ footer {
       <ul class="footer-links">
         <li><a href="https://www.instagram.com/boho.rooftop/" target="_blank">Instagram</a></li>
         <li><a href="https://www.tiktok.com/@boho.rooftop">TikTok</a></li>
+
       </ul>
     </div>
   </div>
@@ -1771,11 +1880,11 @@ footer {
 </footer>
 
 <script>
-/* ─ Nav scroll ─ */
+// Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('solid', window.scrollY > 50), {passive:true});
 
-/* ─ Hamburger drawer ─ */
+// Hamburger drawer
 const ham = document.getElementById('ham');
 const drawer = document.getElementById('drawer');
 const drawerClose = document.getElementById('drawerClose');
@@ -1784,7 +1893,7 @@ drawerClose.addEventListener('click', closeDrawer);
 document.querySelectorAll('.dl').forEach(l => l.addEventListener('click', closeDrawer));
 function closeDrawer(){ drawer.classList.remove('open'); document.body.style.overflow=''; }
 
-/* ─ Menu overlay ─ */
+// Menu overlay
 const menuOverlay = document.getElementById('menuOverlay');
 const menuTrigger = document.getElementById('menuTrigger');
 const menuClose   = document.getElementById('menuClose');
@@ -1805,16 +1914,10 @@ function closeMenu(){
 menuTrigger.addEventListener('click', () => menuOverlay.classList.contains('open') ? closeMenu() : openMenu());
 menuClose.addEventListener('click', closeMenu);
 drawerMenuBtn.addEventListener('click', openMenu);
-
-// close on backdrop click (outside menu-header + menu-tabs + menu-body)
-menuOverlay.addEventListener('click', e => {
-  if(e.target === menuOverlay) closeMenu();
-});
-
-// Escape key
+menuOverlay.addEventListener('click', e => { if(e.target === menuOverlay) closeMenu(); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
 
-/* ─ Menu tabs ─ */
+// Menu tabs
 document.querySelectorAll('.menu-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     const id = tab.dataset.tab;
@@ -1825,7 +1928,7 @@ document.querySelectorAll('.menu-tab').forEach(tab => {
   });
 });
 
-/* ─ Stars ─ */
+// Stars
 const starsEl = document.getElementById('stars');
 for(let i=0;i<90;i++){
   const s = document.createElement('div');
@@ -1835,18 +1938,11 @@ for(let i=0;i<90;i++){
   starsEl.appendChild(s);
 }
 
-/* ─ Reveal on scroll ─ */
+// Reveal on scroll
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
 }, {threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-/* ─ Touch: tap card to show ingredients ─ */
-document.querySelectorAll('.cocktail-card').forEach(card => {
-  card.addEventListener('click', () => {
-    card.classList.toggle('touch-open');
-  });
-});
 </script>
 </body>
 </html>
